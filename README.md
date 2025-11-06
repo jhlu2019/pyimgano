@@ -19,7 +19,10 @@ A comprehensive, production-ready Python toolkit for visual anomaly detection, i
 - 📦 **Unified API** - Consistent interface across all algorithms with factory pattern
 - ⚡ **High Performance** - Top-tier algorithms (ECOD, COPOD) optimized for speed and accuracy
 - 🎯 **Flexible** - Works with any feature extractor or end-to-end deep learning
-- 📊 **Well Documented** - Extensive docs, algorithm guide, and examples
+- 📊 **Comprehensive Evaluation** - AUROC, AP, F1, confusion matrix, and more
+- 🏆 **Built-in Benchmarking** - Compare multiple algorithms systematically
+- 🎨 **Rich Visualization** - Anomaly heatmaps, ROC curves, score distributions
+- 📖 **Well Documented** - Extensive docs, algorithm guide, and examples
 - 🔧 **Easy to Extend** - Plugin architecture with model registry system
 
 ---
@@ -251,7 +254,8 @@ anomalies = detector.predict(monitoring_frames)
 
 ## 📖 Documentation
 
-- **[Deep Learning Models Guide](docs/DEEP_LEARNING_MODELS.md)** ⭐ - SOTA deep learning algorithms (NEW!)
+- **[Deep Learning Models Guide](docs/DEEP_LEARNING_MODELS.md)** ⭐ - SOTA deep learning algorithms
+- **[Evaluation & Benchmarking Guide](docs/EVALUATION_AND_BENCHMARK.md)** ⭐ - NEW! Comprehensive evaluation tools
 - **[Algorithm Selection Guide](docs/ALGORITHM_SELECTION_GUIDE.md)** - Choose the right algorithm
 - **[API Reference](docs/)** - Detailed API documentation
 - **[Examples](examples/)** - Code examples and tutorials

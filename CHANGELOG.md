@@ -42,11 +42,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Classical ML tests (test_pyod_models.py)
   - Deep learning tests (test_dl_models.py) - 400+ lines covering all DL models
 - Enhanced documentation structure with dedicated DL guide
+- **Comprehensive Evaluation Module** (`pyimgano.evaluation`) ⭐
+  - `compute_auroc()` - ROC-AUC computation
+  - `compute_average_precision()` - Average Precision for imbalanced datasets
+  - `compute_classification_metrics()` - Precision, Recall, F1, Specificity, Accuracy
+  - `find_optimal_threshold()` - Automatic threshold optimization (F1, Youden, etc.)
+  - `evaluate_detector()` - One-stop comprehensive evaluation
+  - `compute_pro_score()` - Pixel-level PRO score for localization
+  - `print_evaluation_summary()` - Formatted result display
+- **Benchmarking Tools** (`pyimgano.benchmark`) ⭐
+  - `AlgorithmBenchmark` class - Systematic multi-algorithm comparison
+  - `quick_benchmark()` - Fast benchmarking with defaults
+  - Automatic timing measurements (training and inference)
+  - Performance ranking by any metric
+  - JSON export for results
+- **Visualization Module** (`pyimgano.visualization`) ⭐
+  - `plot_anomaly_map()` - Heatmap overlay on images
+  - `plot_roc_curve()` - ROC curve with AUC
+  - `plot_precision_recall_curve()` - PR curve with AP
+  - `plot_score_distribution()` - Score histograms for normal/anomaly
+  - `compare_detectors()` - Side-by-side detector comparison
+  - `save_anomaly_overlay()` - Fast OpenCV-based overlay (no matplotlib)
+- **Example Scripts** (examples/) ⭐
+  - `quick_start.py` - Basic usage example
+  - `benchmark_example.py` - Multi-algorithm benchmarking
+  - `visualization_example.py` - Visualization demonstrations
+- **Expanded Test Suite** ⭐
+  - `test_evaluation.py` - 400+ lines testing all metrics
+  - `test_integration.py` - End-to-end workflow tests
+  - Synthetic dataset fixtures for testing
+  - Edge case and error handling tests
+- **Documentation**:
+  - `EVALUATION_AND_BENCHMARK.md` - Complete evaluation guide
 
 ### Changed
 - Enhanced package metadata and classifiers
 - Improved dependency version specifications
 - Updated development workflow documentation
+- Updated `__init__.py` to export new modules and functions
+- Version bump to 0.2.0
 
 ### Improved
 - Test configuration with coverage reporting
