@@ -24,31 +24,37 @@ def _auto_import(modules: Iterable[str]) -> None:
 
 _auto_import(
     [
+        # Classical ML algorithms
         "abod",
+        "cblof",
+        "copod",  # NEW: High-performance, parameter-free (ICDM 2020)
+        "dbscan",
+        "ecod",  # NEW: State-of-the-art, parameter-free (TKDE 2022)
+        "hbos",
+        "Isolationforest",
+        "knn",  # NEW: K-Nearest Neighbors (classic)
+        "kpca",
+        "k_means",
+        "loci",
+        "loda",
+        "lof",
+        "lscp",
+        "ocsvm",
+        "pca",  # NEW: Principal Component Analysis (classic)
+        "suod",
+        "xgbod",
+        # Deep learning algorithms
         "ae",
         "ae1svm",
         "alad",
-        "cblof",
-        "dbscan",
         "deep_svdd",
         "efficientad",
         "fastflow",
-        "Isolationforest",
-        "reverse_distillation",
-        "xgbod",
-        "mo_gaal",
-        "suod",
         "imdd",
-        "hbos",
-        "loci",
-        "lscp",
-        "kpca",
-        "k_means",
-        "lof",
-        "loda",
-        "ocsvm",
+        "mo_gaal",
         "one_svm_cnn",
         "padim",
+        "reverse_distillation",
         "ssim",
         "ssim_struct",
         "vae",

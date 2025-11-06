@@ -20,6 +20,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MANIFEST.in for proper package distribution
 - .editorconfig for consistent coding style
 - tox configuration for multi-version testing
+- New PyOD algorithm integrations:
+  - **ECOD** (Empirical CDF-based, TKDE 2022) - State-of-the-art, parameter-free
+  - **COPOD** (Copula-based, ICDM 2020) - High-performance, parameter-free
+  - **KNN** (K-Nearest Neighbors) - Classic, simple and effective
+  - **PCA** (Principal Component Analysis) - Classic dimensionality reduction
+- Enhanced error handling and logging for all detectors
+- Improved PyOD version compatibility (>=1.1.0, <3.0.0)
 
 ### Changed
 - Enhanced package metadata and classifiers
