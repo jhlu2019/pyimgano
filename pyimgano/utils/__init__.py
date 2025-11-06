@@ -110,3 +110,81 @@ __all__ += [
     "multi_scale_defect_map",
     "defect_preprocess_pipeline",
 ]
+
+# Dataset utilities
+from .datasets import (
+    MVTecDataset,
+    BTADDataset,
+    CustomDataset,
+    load_dataset,
+)
+
+__all__ += [
+    "MVTecDataset",
+    "BTADDataset",
+    "CustomDataset",
+    "load_dataset",
+]
+
+# Advanced visualization utilities
+from .advanced_viz import (
+    plot_roc_curve,
+    plot_pr_curve,
+    plot_confusion_matrix,
+    plot_score_distribution,
+    plot_feature_space_tsne,
+    plot_anomaly_heatmap,
+    plot_multi_model_comparison,
+    plot_threshold_analysis,
+    create_evaluation_report,
+)
+
+__all__ += [
+    "plot_roc_curve",
+    "plot_pr_curve",
+    "plot_confusion_matrix",
+    "plot_score_distribution",
+    "plot_feature_space_tsne",
+    "plot_anomaly_heatmap",
+    "plot_multi_model_comparison",
+    "plot_threshold_analysis",
+    "create_evaluation_report",
+]
+
+# Model management utilities
+from .model_utils import (
+    save_model,
+    load_model,
+    save_checkpoint,
+    load_checkpoint,
+    get_model_info,
+    export_model_config,
+    profile_model,
+    ModelRegistry,
+    compare_models,
+)
+
+__all__ += [
+    "save_model",
+    "load_model",
+    "save_checkpoint",
+    "load_checkpoint",
+    "get_model_info",
+    "export_model_config",
+    "profile_model",
+    "ModelRegistry",
+    "compare_models",
+]
+
+# Experiment tracking utilities
+from .experiment_tracker import (
+    Experiment,
+    ExperimentTracker,
+    track_experiment,
+)
+
+__all__ += [
+    "Experiment",
+    "ExperimentTracker",
+    "track_experiment",
+]

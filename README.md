@@ -19,10 +19,12 @@ A comprehensive, production-ready Python toolkit for visual anomaly detection, i
 - 📦 **Unified API** - Consistent interface across all algorithms with factory pattern
 - ⚡ **High Performance** - Top-tier algorithms (ECOD, COPOD) optimized for speed and accuracy
 - 🎯 **Flexible** - Works with any feature extractor or end-to-end deep learning
-- 🖼️ **Image Preprocessing** - 80+ operations (edge detection, morphology, filters, FFT, texture analysis, segmentation, augmentation) with easy integration
-- 📊 **Comprehensive Evaluation** - AUROC, AP, F1, confusion matrix, and more
+- 🖼️ **Image Preprocessing** - 80+ operations (edge detection, morphology, filters, FFT, texture analysis, segmentation, augmentation)
+- 📊 **Dataset Loaders** ⭐ NEW! - MVTec AD, BTAD, custom datasets with automatic loading
+- 📈 **Advanced Visualization** ⭐ NEW! - ROC/PR curves, confusion matrices, t-SNE, anomaly heatmaps
+- 💾 **Model Management** ⭐ NEW! - Save/load, versioning, profiling, model registry
+- 🔬 **Experiment Tracking** ⭐ NEW! - Hyperparameter logging, metric tracking, report generation
 - 🏆 **Built-in Benchmarking** - Compare multiple algorithms systematically
-- 🎨 **Rich Visualization** - Anomaly heatmaps, ROC curves, score distributions
 - 📖 **Well Documented** - Extensive docs, algorithm guide, and examples
 - 🔧 **Easy to Extend** - Plugin architecture with model registry system
 
@@ -488,15 +490,130 @@ Start Here
 
 ---
 
+## 🛠️ Utility Functions
+
+PyImgAno includes comprehensive utility functions for the complete anomaly detection workflow:
+
+### Dataset Loading 📊
+```python
+from pyimgano.utils import MVTecDataset, load_dataset
+
+# Load MVTec AD dataset
+dataset = MVTecDataset(root='./mvtec_ad', category='bottle', resize=(256, 256))
+train_data = dataset.get_train_data()
+test_data, test_labels, test_masks = dataset.get_test_data()
+
+# Or use factory function
+dataset = load_dataset('mvtec', './mvtec_ad', category='bottle')
+```
+
+**Supported Datasets:**
+- MVTec AD (15 categories)
+- BTAD (3 categories)
+- Custom datasets (flexible structure)
+
+### Advanced Visualization 📈
+```python
+from pyimgano.utils import (
+    plot_roc_curve, plot_confusion_matrix,
+    plot_score_distribution, create_evaluation_report
+)
+
+# ROC curve
+auc_score, fig = plot_roc_curve(y_true, y_scores, save_path='roc.png')
+
+# Confusion matrix
+plot_confusion_matrix(y_true, y_pred, labels=['Normal', 'Anomaly'])
+
+# Score distribution
+plot_score_distribution(normal_scores, anomaly_scores)
+
+# Complete evaluation report
+figures = create_evaluation_report(y_true, y_scores, y_pred, model_name='PatchCore')
+```
+
+**Available Plots:**
+- ROC curves
+- Precision-Recall curves
+- Confusion matrices
+- Score distributions
+- t-SNE feature space visualization
+- Anomaly heatmaps
+- Multi-model comparisons
+- Threshold analysis
+
+### Model Management 💾
+```python
+from pyimgano.utils import save_model, load_model, ModelRegistry, profile_model
+
+# Save/load models
+save_model(detector, 'model.pkl', metadata={'auc': 0.98})
+detector = load_model('model.pkl')
+
+# Model registry
+registry = ModelRegistry('./models')
+registry.register('patchcore_v1', detector, metadata={'version': '1.0'})
+model = registry.load('patchcore_v1')
+
+# Profile performance
+metrics = profile_model(detector, test_data, n_runs=10)
+print(f"Avg time: {metrics['avg_time_ms']:.2f} ms")
+```
+
+**Features:**
+- Save/load with metadata
+- Model registry for version management
+- Checkpointing
+- Performance profiling
+- Model comparison
+- Configuration export
+
+### Experiment Tracking 🔬
+```python
+from pyimgano.utils import ExperimentTracker, track_experiment
+
+# Create tracker
+tracker = ExperimentTracker('./experiments')
+
+# Create experiment
+exp = tracker.create_experiment('patchcore_bottle', model_type='PatchCore')
+exp.log_params({'backbone': 'resnet50', 'lr': 0.001})
+exp.log_metric('auc', 0.98)
+exp.add_tag('production')
+
+# Quick experiment tracking
+exp = track_experiment(
+    'my_experiment',
+    model=detector,
+    train_data=train_imgs,
+    test_data=test_imgs,
+    test_labels=test_labels,
+    backbone='resnet50'
+)
+
+# Generate report
+report = tracker.generate_report(exp_id, output_path='report.md')
+```
+
+**Features:**
+- Hyperparameter logging
+- Metric tracking over time
+- Artifact management
+- Experiment comparison
+- Markdown report generation
+
+---
+
 ## 📖 Documentation
 
 ### Core Guides
 - **[Quick Start Guide](docs/QUICK_START.md)** ⭐ - Get started in 5 minutes
-- **[SOTA Algorithms Guide](docs/SOTA_ALGORITHMS.md)** ⭐ NEW! - Latest state-of-the-art algorithms (WinCLIP, SPADE, etc.)
+- **[SOTA Algorithms Guide](docs/SOTA_ALGORITHMS.md)** ⭐ - Latest state-of-the-art algorithms (WinCLIP, SPADE, etc.)
 - **[Deep Learning Models Guide](docs/DEEP_LEARNING_MODELS.md)** ⭐ - Comprehensive deep learning guide
 - **[Algorithm Selection Guide](docs/ALGORITHM_SELECTION_GUIDE.md)** - Choose the right algorithm
 - **[Preprocessing Guide](docs/PREPROCESSING.md)** ⭐ - Image enhancement and preprocessing
 - **[Evaluation & Benchmarking Guide](docs/EVALUATION_AND_BENCHMARK.md)** ⭐ - Comprehensive evaluation tools
+- **[Utilities Guide](examples/utilities_example.py)** ⭐ NEW! - Dataset loading, visualization, model management
 
 ### Reference
 - **[API Reference](docs/)** - Detailed API documentation
