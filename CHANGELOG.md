@@ -32,9 +32,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Segmentation** (6): Otsu, Adaptive (mean/Gaussian), Triangle, Yen, Watershed
   - **Image Pyramids** (2): Gaussian pyramid, Laplacian pyramid
 
+  **Augmentation Operations (30+)** ⭐ NEW!:
+  - **Geometric Augmentations** (7): Rotation, Flipping, Scaling, Translation, Shearing, Perspective, Affine
+  - **Color Augmentations** (5): Brightness, Contrast, Saturation, Hue adjustment, Color jitter
+  - **Noise Addition** (4): Gaussian noise, Salt-and-pepper noise, Poisson noise, Speckle noise
+  - **Blur Effects** (4): Motion blur, Defocus blur, Glass blur, Zoom blur
+  - **Weather Effects** (5): Rain, Fog, Snow, Shadow, Sunflare effects
+  - **Occlusion & Cutout** (4): Random cutout, Grid mask, Mixup, CutMix
+  - **Distortion** (2): Elastic transform, Grid distortion
+  - **Pipeline System** (8): Compose, OneOf, RandomApply, + 5 preset pipelines (light, medium, heavy, weather, anomaly)
+
+  - **Total operations: 80+** (25 basic + 25 advanced + 30 augmentation)
   - Comprehensive preprocessing documentation (docs/PREPROCESSING.md)
   - Complete test suite (tests/test_preprocessing.py - 500+ lines)
-  - Usage examples (examples/preprocessing_example.py, advanced_preprocessing_example.py)
+  - Usage examples (examples/preprocessing_example.py, advanced_preprocessing_example.py, augmentation_example.py)
 - **3 New High-Performance Deep Learning Algorithms** ⚡:
   - **DRAEM** (ICCV 2021) - Discriminatively trained reconstruction with synthetic anomalies
   - **CFlow-AD** (WACV 2022) - Real-time conditional normalizing flows

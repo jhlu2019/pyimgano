@@ -9,6 +9,7 @@ This module provides comprehensive image preprocessing capabilities including:
 - Normalization and standardization
 - Preprocessing pipelines
 - Advanced operations (FFT, texture analysis, segmentation, etc.)
+- Image augmentation (rotation, flip, color jitter, noise, blur, weather effects, etc.)
 """
 
 from .enhancer import (
@@ -58,6 +59,38 @@ from .advanced_operations import (
     CornerDetector,
     MorphologicalAdvanced,
 )
+from .augmentation_pipeline import (
+    # Pipeline classes
+    Compose,
+    OneOf,
+    RandomApply,
+    AugmentationPipeline,
+    # Transform classes
+    RandomRotate,
+    RandomFlip,
+    RandomScale,
+    RandomTranslate,
+    RandomShear,
+    RandomPerspective,
+    ColorJitter,
+    GaussianNoise,
+    SaltPepperNoise,
+    MotionBlur,
+    DefocusBlur,
+    RandomRain,
+    RandomFog,
+    RandomSnow,
+    RandomShadow,
+    RandomCutout,
+    GridMask,
+    ElasticTransform,
+    # Preset pipelines
+    get_light_augmentation,
+    get_medium_augmentation,
+    get_heavy_augmentation,
+    get_weather_augmentation,
+    get_anomaly_augmentation,
+)
 
 __all__ = [
     # Main classes
@@ -105,4 +138,34 @@ __all__ = [
     "ThresholdMethod",
     "CornerDetector",
     "MorphologicalAdvanced",
+    # Augmentation pipelines
+    "Compose",
+    "OneOf",
+    "RandomApply",
+    "AugmentationPipeline",
+    # Augmentation transforms
+    "RandomRotate",
+    "RandomFlip",
+    "RandomScale",
+    "RandomTranslate",
+    "RandomShear",
+    "RandomPerspective",
+    "ColorJitter",
+    "GaussianNoise",
+    "SaltPepperNoise",
+    "MotionBlur",
+    "DefocusBlur",
+    "RandomRain",
+    "RandomFog",
+    "RandomSnow",
+    "RandomShadow",
+    "RandomCutout",
+    "GridMask",
+    "ElasticTransform",
+    # Preset augmentation pipelines
+    "get_light_augmentation",
+    "get_medium_augmentation",
+    "get_heavy_augmentation",
+    "get_weather_augmentation",
+    "get_anomaly_augmentation",
 ]

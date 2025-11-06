@@ -19,7 +19,7 @@ A comprehensive, production-ready Python toolkit for visual anomaly detection, i
 - 📦 **Unified API** - Consistent interface across all algorithms with factory pattern
 - ⚡ **High Performance** - Top-tier algorithms (ECOD, COPOD) optimized for speed and accuracy
 - 🎯 **Flexible** - Works with any feature extractor or end-to-end deep learning
-- 🖼️ **Image Preprocessing** - 50+ operations (edge detection, morphology, filters, FFT, texture analysis, segmentation) with easy integration
+- 🖼️ **Image Preprocessing** - 80+ operations (edge detection, morphology, filters, FFT, texture analysis, segmentation, augmentation) with easy integration
 - 📊 **Comprehensive Evaluation** - AUROC, AP, F1, confusion matrix, and more
 - 🏆 **Built-in Benchmarking** - Compare multiple algorithms systematically
 - 🎨 **Rich Visualization** - Anomaly heatmaps, ROC curves, score distributions
@@ -177,7 +177,7 @@ for name, preds in results.items():
 
 ## 🖼️ Image Preprocessing
 
-Comprehensive preprocessing module with **50+ operations** for enhanced anomaly detection:
+Comprehensive preprocessing module with **80+ operations** including augmentation for enhanced anomaly detection:
 
 ### Quick Example
 
@@ -212,9 +212,32 @@ class ECODWithPreprocessing(PreprocessingMixin, ECOD):
 detector = ECODWithPreprocessing()
 detector.fit(train_images)
 scores = detector.predict(test_images)
+
+# Method 3: Data Augmentation for Training
+from pyimgano.preprocessing import (
+    Compose, OneOf, RandomRotate, RandomFlip,
+    ColorJitter, GaussianNoise, get_medium_augmentation
+)
+
+# Custom augmentation pipeline
+aug_pipeline = Compose([
+    RandomFlip(mode="horizontal", p=0.5),
+    RandomRotate(angle_range=(-20, 20), p=0.5),
+    ColorJitter(brightness=(0.8, 1.2), contrast=(0.8, 1.2), p=0.5),
+    OneOf([
+        GaussianNoise(std_range=(10, 25), p=1.0),
+        MotionBlur(kernel_size_range=(5, 15), p=1.0),
+    ], p=0.3),
+])
+
+# Or use preset augmentation
+aug_pipeline = get_medium_augmentation()
+
+# Augment training data
+augmented_images = [aug_pipeline(img) for img in train_images]
 ```
 
-### Available Operations (50+)
+### Available Operations (80+)
 
 #### Basic Operations (25)
 | Category | Operations | Count |
@@ -225,7 +248,7 @@ scores = detector.predict(test_images)
 | **Normalization** | MinMax, Z-Score, L2, Robust | 4 |
 | **Enhancement** | Sharpen, Unsharp Mask, CLAHE | 3 |
 
-#### Advanced Operations (25+)
+#### Advanced Operations (25)
 | Category | Operations | Count |
 |----------|------------|-------|
 | **Frequency Domain** | FFT, IFFT, Lowpass, Highpass, Bandpass, Bandstop | 6 |
@@ -237,6 +260,18 @@ scores = detector.predict(test_images)
 | **Adv. Morphology** | Skeleton, Thinning, Convex hull, Distance transform | 4 |
 | **Segmentation** | Otsu, Adaptive, Triangle, Yen, Watershed | 6 |
 | **Pyramids** | Gaussian pyramid, Laplacian pyramid | 2 |
+
+#### Augmentation Operations (30+) ⭐ NEW!
+| Category | Operations | Count |
+|----------|------------|-------|
+| **Geometric** | Rotate, Flip, Scale, Translate, Shear, Perspective, Affine | 7 |
+| **Color** | Brightness, Contrast, Saturation, Hue, Color jitter | 5 |
+| **Noise** | Gaussian, Salt-and-pepper, Poisson, Speckle | 4 |
+| **Blur** | Motion blur, Defocus blur, Glass blur, Zoom blur | 4 |
+| **Weather** | Rain, Fog, Snow, Shadow, Sunflare | 5 |
+| **Occlusion** | Random cutout, Grid mask, Mixup, CutMix | 4 |
+| **Distortion** | Elastic transform, Grid distortion | 2 |
+| **Pipelines** | Compose, OneOf, RandomApply, 5 preset pipelines | 8 |
 
 **See [Preprocessing Guide](docs/PREPROCESSING.md) for detailed usage and best practices**
 
