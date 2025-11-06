@@ -52,8 +52,10 @@ _auto_import(
         "ae1svm",
         "alad",
         "cflow",  # NEW: Conditional normalizing flows (WACV 2022) ⭐
+        "cutpaste",  # NEW: Self-supervised learning (CVPR 2021) ⭐⭐
         "deep_svdd",
         "dfm",  # NEW: Fast discriminative feature modeling ⭐
+        "differnet",  # NEW: Learnable difference detector (WACV 2023) ⭐⭐
         "draem",  # NEW: Discriminative reconstruction (ICCV 2021) ⭐
         "efficientad",
         "fastflow",
@@ -68,6 +70,7 @@ _auto_import(
         "ssim_struct",
         "stfpm",  # Student-Teacher matching (BMVC 2021)
         "vae",
+        "winclip",  # NEW: Zero-shot CLIP-based (CVPR 2023) ⭐⭐⭐
     ]
 )
 
