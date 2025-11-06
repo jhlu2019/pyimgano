@@ -58,9 +58,12 @@ _auto_import(
         "mo_gaal",
         "one_svm_cnn",
         "padim",
+        "patchcore",  # NEW: SOTA patch-level detection (CVPR 2022)
         "reverse_distillation",
+        "simplenet",  # NEW: Ultra-fast SOTA (CVPR 2023)
         "ssim",
         "ssim_struct",
+        "stfpm",  # NEW: Student-Teacher matching (BMVC 2021)
         "vae",
     ]
 )
