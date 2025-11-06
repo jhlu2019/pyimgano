@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Image Preprocessing Module** (`pyimgano.preprocessing`) ⭐ NEW!
+  - **ImageEnhancer** - High-level interface for 20+ enhancement operations
+  - **PreprocessingPipeline** - Sequential operation composition with method chaining
+  - **PreprocessingMixin** - Easy integration with detectors via mixin pattern
+  - **Edge Detection** (7 methods): Canny, Sobel, Sobel X/Y, Laplacian, Scharr, Prewitt
+  - **Morphological Operations** (7 types): Erosion, Dilation, Opening, Closing, Gradient, TopHat, BlackHat
+  - **Filters** (4 types): Gaussian, Bilateral, Median, Box
+  - **Normalization** (4 methods): MinMax, Z-Score, L2, Robust (IQR-based)
+  - **Advanced Operations**: Sharpen, Unsharp Mask, CLAHE
+  - Comprehensive preprocessing documentation (docs/PREPROCESSING.md)
+  - Complete test suite (tests/test_preprocessing.py - 500+ lines)
+  - Usage examples (examples/preprocessing_example.py)
 - **3 New High-Performance Deep Learning Algorithms** ⚡:
   - **DRAEM** (ICCV 2021) - Discriminatively trained reconstruction with synthetic anomalies
   - **CFlow-AD** (WACV 2022) - Real-time conditional normalizing flows

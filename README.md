@@ -19,6 +19,7 @@ A comprehensive, production-ready Python toolkit for visual anomaly detection, i
 - 📦 **Unified API** - Consistent interface across all algorithms with factory pattern
 - ⚡ **High Performance** - Top-tier algorithms (ECOD, COPOD) optimized for speed and accuracy
 - 🎯 **Flexible** - Works with any feature extractor or end-to-end deep learning
+- 🖼️ **Image Preprocessing** - 20+ operations (edge detection, morphology, filters, normalization) with easy integration
 - 📊 **Comprehensive Evaluation** - AUROC, AP, F1, confusion matrix, and more
 - 🏆 **Built-in Benchmarking** - Compare multiple algorithms systematically
 - 🎨 **Rich Visualization** - Anomaly heatmaps, ROC curves, score distributions
@@ -174,6 +175,58 @@ for name, preds in results.items():
 
 ---
 
+## 🖼️ Image Preprocessing
+
+Comprehensive preprocessing module with 20+ operations for enhanced anomaly detection:
+
+### Quick Example
+
+```python
+from pyimgano.preprocessing import PreprocessingMixin, PreprocessingPipeline
+from pyimgano.models import ECOD
+
+# Method 1: Using Mixin (Recommended)
+class ECODWithPreprocessing(PreprocessingMixin, ECOD):
+    def __init__(self):
+        super().__init__()
+        self.setup_preprocessing(enable=True, use_pipeline=True)
+
+        # Configure preprocessing pipeline
+        self.add_preprocessing_step('gaussian_blur', ksize=(5, 5))
+        self.add_preprocessing_step('normalize', method='minmax')
+
+    def fit(self, X, y=None):
+        X_processed = self.preprocess_images(X)
+        return super().fit([img.flatten() for img in X_processed], y)
+
+# Usage
+detector = ECODWithPreprocessing()
+detector.fit(train_images)
+scores = detector.predict(test_images)
+
+# Method 2: Standalone Pipeline
+pipeline = PreprocessingPipeline()
+pipeline.add_step('gaussian_blur', ksize=(5, 5))
+pipeline.add_step('detect_edges', method='canny')
+pipeline.add_step('normalize', method='minmax')
+
+processed = pipeline.transform(image)
+```
+
+### Available Operations
+
+| Category | Operations | Count |
+|----------|------------|-------|
+| **Edge Detection** | Canny, Sobel, Laplacian, Scharr, Prewitt, Sobel X/Y | 7 |
+| **Morphology** | Erosion, Dilation, Opening, Closing, Gradient, TopHat, BlackHat | 7 |
+| **Filters** | Gaussian, Bilateral, Median, Box | 4 |
+| **Normalization** | MinMax, Z-Score, L2, Robust | 4 |
+| **Advanced** | Sharpen, Unsharp Mask, CLAHE | 3 |
+
+**See [Preprocessing Guide](docs/PREPROCESSING.md) for detailed usage and best practices**
+
+---
+
 ## 📚 Available Algorithms
 
 ### Classical Machine Learning (19 algorithms)
@@ -258,7 +311,8 @@ anomalies = detector.predict(monitoring_frames)
 ## 📖 Documentation
 
 - **[Deep Learning Models Guide](docs/DEEP_LEARNING_MODELS.md)** ⭐ - SOTA deep learning algorithms
-- **[Evaluation & Benchmarking Guide](docs/EVALUATION_AND_BENCHMARK.md)** ⭐ - NEW! Comprehensive evaluation tools
+- **[Preprocessing Guide](docs/PREPROCESSING.md)** ⭐ - NEW! Image enhancement and preprocessing
+- **[Evaluation & Benchmarking Guide](docs/EVALUATION_AND_BENCHMARK.md)** ⭐ - Comprehensive evaluation tools
 - **[Algorithm Selection Guide](docs/ALGORITHM_SELECTION_GUIDE.md)** - Choose the right algorithm
 - **[API Reference](docs/)** - Detailed API documentation
 - **[Examples](examples/)** - Code examples and tutorials
@@ -272,31 +326,47 @@ anomalies = detector.predict(monitoring_frames)
 ```
 pyimgano/
 ├── pyimgano/
-│   ├── models/          # 34+ anomaly detection algorithms
+│   ├── models/          # 37+ anomaly detection algorithms
 │   │   ├── Classical ML (19 algorithms)
 │   │   │   ├── ecod.py          # ECOD (TKDE 2022)
 │   │   │   ├── copod.py         # COPOD (ICDM 2020)
 │   │   │   ├── feature_bagging.py
 │   │   │   ├── knn.py, pca.py, lof.py, ...
 │   │   │   └── ...
-│   │   ├── Deep Learning (15 algorithms)
+│   │   ├── Deep Learning (18 algorithms)
 │   │   │   ├── simplenet.py     # SimpleNet (CVPR 2023) ⭐
 │   │   │   ├── patchcore.py     # PatchCore (CVPR 2022) ⭐
 │   │   │   ├── stfpm.py         # STFPM (BMVC 2021) ⭐
+│   │   │   ├── draem.py         # DRAEM (ICCV 2021) ⭐
+│   │   │   ├── cflow.py         # CFlow-AD (WACV 2022) ⭐
+│   │   │   ├── dfm.py           # DFM (training-free) ⭐
 │   │   │   ├── fastflow.py, padim.py, ...
 │   │   │   └── ...
 │   │   ├── registry.py  # Model registry system
 │   │   └── baseml.py    # Base classes
+│   ├── preprocessing/   # Image preprocessing module ⭐ NEW!
+│   │   ├── enhancer.py  # 20+ enhancement operations
+│   │   ├── mixin.py     # Easy integration mixin
+│   │   └── __init__.py
 │   ├── utils/           # Image processing utilities
 │   ├── datasets/        # Data loading utilities
+│   ├── evaluation.py    # Evaluation metrics ⭐
+│   ├── benchmark.py     # Algorithm benchmarking ⭐
 │   └── visualization/   # Visualization tools
 ├── tests/               # Comprehensive test suite
 │   ├── test_pyod_models.py      # Classical ML tests
 │   ├── test_dl_models.py        # Deep learning tests
+│   ├── test_preprocessing.py    # Preprocessing tests ⭐ NEW!
+│   ├── test_evaluation.py       # Evaluation tests
 │   └── ...
 ├── examples/            # Usage examples
+│   ├── preprocessing_example.py # Preprocessing guide ⭐ NEW!
+│   ├── benchmark_example.py
+│   └── ...
 ├── docs/                # Documentation
 │   ├── DEEP_LEARNING_MODELS.md  # DL algorithms guide ⭐
+│   ├── PREPROCESSING.md         # Preprocessing guide ⭐ NEW!
+│   ├── EVALUATION_AND_BENCHMARK.md
 │   ├── ALGORITHM_SELECTION_GUIDE.md
 │   └── ...
 └── .github/             # CI/CD workflows

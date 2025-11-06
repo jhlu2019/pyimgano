@@ -1,6 +1,6 @@
 """PyImgAno - Enterprise-Grade Visual Anomaly Detection Toolkit."""
 
-from . import datasets, models, utils, visualization
+from . import datasets, models, preprocessing, utils, visualization
 from .benchmark import AlgorithmBenchmark, quick_benchmark
 from .evaluation import (
     compute_auroc,
@@ -17,6 +17,7 @@ __all__ = [
     # Modules
     "datasets",
     "models",
+    "preprocessing",
     "utils",
     "visualization",
     # Evaluation
